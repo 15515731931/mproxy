@@ -9,7 +9,10 @@ import (
 )
 
 type Client struct {
-	conn net.Conn
+	conn     net.Conn
+	username string
+	password string
+	database string
 }
 
 func (c *Client) Connet(network, address string) error {

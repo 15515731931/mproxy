@@ -12,7 +12,7 @@ func main() {
 	log.SetFlags(log.Lshortfile)
 
 	client := new(Client)
-	err := client.Connet("tcp", "127.0.0.1:3306")
+	err := client.Connet("tcp", "192.168.22.76:3306")
 	if err != nil {
 		log.Fatal(err)
 	}

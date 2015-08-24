@@ -4,5 +4,4 @@
 
 package main
 
-type HandshakeResponse struct {
-}
+import ()

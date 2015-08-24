@@ -13,7 +13,8 @@ import (
 type PacketHeader struct {
 	payloadLength [3]byte
 	PayloadLength uint32
-	sequenceID    uint8
+	sequenceID    byte
+	SequenceID    uint8
 }
 
 func (p *PacketHeader) Read(c *Client) error {
@@ -32,8 +33,12 @@ func (p *PacketHeader) Read(c *Client) error {
 	if p.PayloadLength < 1 {
 		return errors.New("Invalid payload length")
 	}
+
 	//FIXME: Check p.sequenceID
-	p.sequenceID = uint8(header[3])
+	p.sequenceID = header[3]
+	p.SequenceID = uint8(header[3])
+
+	log.Printf("%#v\n", p)
 
 	return nil
 }
