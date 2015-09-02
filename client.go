@@ -5,28 +5,34 @@
 package main
 
 import (
-	"net"
+    "net"
 )
 
 type Client struct {
-	conn     net.Conn
-	username string
-	password string
-	database string
+    conn     net.Conn
+    username string
+    password string
+    database string
 }
 
 func (c *Client) Connet(network, address string) error {
-	var err error
-	c.conn, err = net.Dial(network, address)
-	if err != nil {
-		return err
-	}
+    var err error
+    c.conn, err = net.Dial(network, address)
+    if err != nil {
+        return err
+    }
 
-	ihp := new(InitialHandshakePacket)
-	err = ihp.Read(c)
-	if err != nil {
-		return err
-	}
+    ihp := new(InitialHandshakePacket)
+    err = ihp.Read(c)
+    if err != nil {
+        return err
+    }
 
-	return nil
+    hrp := new(HandshakeResponsePacket)
+    err = hrp.Init(ihp)
+    if err != nil {
+        return err
+    }
+
+    return nil
 }
