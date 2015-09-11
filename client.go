@@ -29,7 +29,7 @@ func (c *Client) Connet(network, address string) error {
     }
 
     hrp := new(HandshakeResponsePacket)
-    err = hrp.Init(ihp)
+    err = hrp.Write(c, ihp)
     if err != nil {
         return err
     }
